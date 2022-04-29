@@ -5,22 +5,23 @@ import './Accordion.css';
 class Accordion extends React.Component {
     constructor(props) {
         super(props);
-    }
+        this.state = {
+            isActive: false
+        };
+    }   
     
-    render() {
+    render() { 
         return (
-            <div>
-                <button type="button" class="accordion-header">{ this.props.name }</button>
-
-                <div class="accordion-content">
-                    <p>Pellentesque habitant morbi tristique senectus et
-                    netus et malesuada fames ac turpis egestas. 
-                    Vestibulum tortor quam, feugiat vitae, 
-                    ultricies eget, tempor sit amet, ante. 
-                    Donec eu libero sit amet quam egestas semper. 
-                    Aenean ultricies mi vitae est. 
-                    Mauris placerat eleifend leo.</p>
-                </div>
+            <div class="accordion">
+                <div type="button" 
+                    class="accordion-header"
+                    onClick={() => this.setState({ isActive: !this.state.isActive })}>
+                        <div class="accordion-title"> { this.props.name } </div>
+                        <div class="accordion-indicator"> { this.state.isActive ? '-' : '+'} </div>
+                        { this.state.isActive && 
+                        <div class="accordion-content"> { this.props.content } </div>
+                        }
+                </div> 
             
             </div>
         );
