@@ -14,15 +14,17 @@ class Accordion extends React.Component {
         return (
             <div class="accordion">
                 <div type="button" 
-                    class="accordion-header"
+                    class="accordion-title"
                     onClick={() => this.setState({ isActive: !this.state.isActive })}>
-                        <div class="accordion-title"> { this.props.name } </div>
+                        { this.props.name }
                         <div class="accordion-indicator"> { this.state.isActive ? '-' : '+'} </div>
-                        { this.state.isActive && 
-                        <div class="accordion-content"> { this.props.content } </div>
-                        }
+                </div>
+
+                <div>     
+                    { this.state.isActive && 
+                    <div class="accordion-content"> { this.props.content } </div>
+                    }
                 </div> 
-            
             </div>
         );
     }
