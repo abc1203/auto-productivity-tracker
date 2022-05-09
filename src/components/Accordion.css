@@ -11,6 +11,7 @@
     color: dimgray;
     font-weight:bold;
     letter-spacing: 2px;
+    padding: 5px 0 5px 0;
 }
 
 .active, .accordion-title:hover {
