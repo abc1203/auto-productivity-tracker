@@ -4,8 +4,6 @@ import './Settings.css';
 
 
 class Settings extends React.Component {
-
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +16,7 @@ class Settings extends React.Component {
         return(
             <div class="settings">
                 <div class="settings-content">
-                    Stop Tracking After 
+                    Stop Tracking After {" "}
 
                     <select name="time-options" class="settings-options">
                         <option value="0">30 seconds</option>
@@ -31,7 +29,7 @@ class Settings extends React.Component {
                         <option value="7">Infinite</option>
                     </select>
 
-                    of Inactivity
+                    {" "} of Inactivity
                 </div>
 
                 <button class="settings-button" 
