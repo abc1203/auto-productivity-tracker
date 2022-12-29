@@ -3,6 +3,8 @@ import Title from './components/Title';
 import Accordion from './components/Accordion';
 import Settings from './components/Settings'
 import TimeChart from './components/TimeChart';
+import WebAct from './components/WebAct';
+import Sites from './components/Sites';
 
 function App() {
   return (
@@ -10,8 +12,9 @@ function App() {
       <Title />
       <Accordion name="Settings" content={<Settings />} />
       <TimeChart />
-      <Accordion name="Productive Sites" content={<Settings />} />
-      <Accordion name="Unproductive Sites" content={<Settings />} />
+      <Accordion name="All Web Activities" content={<WebAct />} />
+      <Accordion name="Productive Sites" content={<Sites />} />
+      <Accordion name="Unproductive Sites" content={<Sites />} />
     </div>
   );
 }

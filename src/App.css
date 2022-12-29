@@ -3,4 +3,15 @@
   width: 500px;
 }
 
+dt:before {
+  content: "";
+  display: block;
+}
+dt, dd {
+  display: inline;
+}
+dd {
+  float: right;
+}
+
 
