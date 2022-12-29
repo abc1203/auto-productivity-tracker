@@ -18,13 +18,13 @@ class Sites extends React.Component {
             <div class="sites">
                 <form>
                     <input id="site-field" type="text" placeholder="Add site to list" onChange={(e) => this.setState({ site: e.target.value })} />
-                    <Button variant="contained" type="submit" onClick={(e) => {
+                    <button type="submit" onClick={(e) => {
                         e.preventDefault();
                         if(this.state.site.length !== 0 && !this.state.siteList.includes(this.state.site)) {
                             this.setState({ siteList: [...this.state.siteList, this.state.site], site: '' });
                         }
                         document.getElementById('site-field').value=null;
-                    }}>Add</Button>
+                    }}>Add</button>
                 </form>
 
                 <dl>
