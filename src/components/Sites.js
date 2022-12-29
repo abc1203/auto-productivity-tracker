@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from '@mui/material/Button';
 import './Sites.css';
 
 class Sites extends React.Component {
@@ -16,13 +17,14 @@ class Sites extends React.Component {
         return (
             <div class="sites">
                 <form>
-                    <input type="text" placeholder="Add site to list" onChange={(e) => this.setState({ site: e.target.value })} />
-                    <button type="submit" onClick={(e) => {
+                    <input id="site-field" type="text" placeholder="Add site to list" onChange={(e) => this.setState({ site: e.target.value })} />
+                    <Button variant="contained" type="submit" onClick={(e) => {
                         e.preventDefault();
                         if(this.state.site.length !== 0 && !this.state.siteList.includes(this.state.site)) {
                             this.setState({ siteList: [...this.state.siteList, this.state.site], site: '' });
                         }
-                    }}>Add</button>
+                        document.getElementById('site-field').value=null;
+                    }}>Add</Button>
                 </form>
 
                 <dl>

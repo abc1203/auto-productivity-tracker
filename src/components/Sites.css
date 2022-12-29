@@ -3,3 +3,13 @@
     line-height: 1.6;
     padding: 20px;
 }
+
+input {
+    height: 20px;
+    width: 80%;
+}
+
+Button {
+    height: 30px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
