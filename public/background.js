@@ -17,6 +17,8 @@ function setDefault(){
         localStorage['today'] = day;
         localStorage['today_domains'] = JSON.stringify({});
     }
+    console.log("background loaded");
+    window.alert("background loaded");
 }
 function checkTime(){
     var pre_time = localStorage['time'];
@@ -57,7 +59,6 @@ function inBlacklist(url) {
 }
 
 function upload_data(){
-
     var timestamp = localStorage['time'];
     var domains_data = JSON.parse(localStorage['domains']);
     var data = {'timestamp':timestamp,"domains_data":domains_data,"user":"tmp_user"};
@@ -65,15 +66,13 @@ function upload_data(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST",request_url);
     xhr.send(JSON.stringify(data));
-
 }
 
 
 function updateData(){
-    chrome.idle.queryState(30,function(state){
-
+    chrome.idle.queryState(30,function(state) {
         if (state === "active"){
-            chrome.tabs.query({"active":true,"lastFocusedWindow":true,},function(tabs){
+            chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs){
 
                 if (tabs.length === 0){
                     return;
@@ -118,14 +117,14 @@ function updateData(){
                             }
                             localStorage['today_domains'] = JSON.stringify(today_domains);
                         }
-
                     }
                 });
-
             });
         }
-
     });
 }
+
 setDefault();
+console.log("default set");
+window.alert("default set");
 setInterval(updateData,update_interval * 1000);

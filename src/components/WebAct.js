@@ -83,6 +83,10 @@ class WebAct extends React.Component {
     
         var percentage = Math.round(other_time*1000/total_time)/10;
         data.push({"name":"others","y":other_time,"dataLabels":{"percentage":percentage,"total_time":total_time}});
+
+        console.log("data extracted");
+        window.alert("data extracted");
+
         return data;
     }
 
