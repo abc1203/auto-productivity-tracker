@@ -17,7 +17,6 @@ function setDefault(){
         localStorage['today'] = day;
         localStorage['today_domains'] = JSON.stringify({});
     }
-
 }
 function checkTime(){
     var pre_time = localStorage['time'];
