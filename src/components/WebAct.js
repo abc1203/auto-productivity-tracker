@@ -1,4 +1,3 @@
-/*global chrome*/
 import React from 'react';
 import './WebAct.css';
 
@@ -40,7 +39,7 @@ class WebAct extends React.Component {
     }
     
     get_detail_data() {
-        var domains = JSON.parse(localStorage["info"]["domains"]);
+        var domains = JSON.parse(chrome.storage.local["domains"]);
         console.log(domains)
         var domain_keys = this.sort_keys(domains);
         var return_data = {}
@@ -54,19 +53,18 @@ class WebAct extends React.Component {
     }
     
     get_detail_title() {
-        var time = localStorage["info"]['time'];
+        var time = chrome.storage.local['time'];
         var time_start = time - this.count_interval;
         return this.timestamp_to_string(time_start*1000) + " 到 "+ this.timestamp_to_string(time*1000)+" 的访问记录";
     }
 
     get_today_data() {
-        chrome.runtime.sendMessage('get-localstorage', (response) => {
-            console.log(response);
-            localStorage.setItem("today_domains", response);
-        });
+        // chrome.runtime.sendMessage('get-localstorage', (response) => {
+        //     console.log(response);
+        //     chrome.storage.local.setItem("today_domains", response);
+        // });
         
-        var domains = JSON.parse(localStorage["today_domains"]);
-        // var domains = JSON.parse('{"google.com":"50"}');
+        var domains = JSON.parse(chrome.storage.local.get(['today_domains']));
         var domain_keys = this.sort_keys(domains);
         var top_keys = domain_keys.slice(0,window.top);
         var other_keys = domain_keys.slice(window.top+1,-1);
