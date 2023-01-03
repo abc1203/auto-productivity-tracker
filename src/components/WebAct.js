@@ -1,3 +1,4 @@
+/*global chrome*/
 import React from 'react';
 import './WebAct.css';
 
@@ -39,7 +40,7 @@ class WebAct extends React.Component {
     }
     
     get_detail_data() {
-        var domains = JSON.parse(localStorage["domains"]);
+        var domains = JSON.parse(localStorage["info"]["domains"]);
         console.log(domains)
         var domain_keys = this.sort_keys(domains);
         var return_data = {}
@@ -53,12 +54,17 @@ class WebAct extends React.Component {
     }
     
     get_detail_title() {
-        var time = localStorage['time'];
+        var time = localStorage["info"]['time'];
         var time_start = time - this.count_interval;
         return this.timestamp_to_string(time_start*1000) + " 到 "+ this.timestamp_to_string(time*1000)+" 的访问记录";
     }
 
-    get_today_data() {		
+    get_today_data() {
+        chrome.runtime.sendMessage('get-localstorage', (response) => {
+            console.log(response);
+            localStorage.setItem("today_domains", response);
+        });
+        
         var domains = JSON.parse(localStorage["today_domains"]);
         // var domains = JSON.parse('{"google.com":"50"}');
         var domain_keys = this.sort_keys(domains);
@@ -84,8 +90,8 @@ class WebAct extends React.Component {
         var percentage = Math.round(other_time*1000/total_time)/10;
         data.push({"name":"others","y":other_time,"dataLabels":{"percentage":percentage,"total_time":total_time}});
 
+        // this is constantly outputed (i.e. get_today_data is constantly getting ran which is good)
         console.log("data extracted");
-        window.alert("data extracted");
 
         return data;
     }

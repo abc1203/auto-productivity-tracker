@@ -1,3 +1,4 @@
+    /*global chrome*/
 var update_interval = 3;
 var count_interval = 300;
 var request_url = "http://127.0.0.1:8888/upload"
@@ -101,8 +102,6 @@ function updateData(){
 
                             localStorage['domains'] = JSON.stringify(domains);
 
-
-                            //更新当天记录
                             var today_domains = JSON.parse(localStorage['today_domains']);
                             if(! today_domains[domain]){
                                 today_domains[domain] = 0;
@@ -124,7 +123,19 @@ function updateData(){
     });
 }
 
+
+function updateLocalStorage() {
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if(message === 'get-localstorage') {
+            sendResponse(localStorage['today_domains']);
+        }
+        return true;
+    });
+}
+
+
 setDefault();
-console.log("default set");
-window.alert("default set");
 setInterval(updateData,update_interval * 1000);
+setInterval(updateLocalStorage, 1000);
+
+

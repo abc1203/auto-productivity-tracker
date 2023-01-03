@@ -1,3 +1,4 @@
+    /*global chrome*/
 var update_interval = 3;
 var count_interval = 300;
 var request_url = "http://127.0.0.1:8888/upload"
@@ -17,6 +18,8 @@ function setDefault(){
         localStorage['today'] = day;
         localStorage['today_domains'] = JSON.stringify({});
     }
+    console.log("background loaded");
+    window.alert("background loaded");
 }
 function checkTime(){
     var pre_time = localStorage['time'];
@@ -57,7 +60,6 @@ function inBlacklist(url) {
 }
 
 function upload_data(){
-
     var timestamp = localStorage['time'];
     var domains_data = JSON.parse(localStorage['domains']);
     var data = {'timestamp':timestamp,"domains_data":domains_data,"user":"tmp_user"};
@@ -65,15 +67,13 @@ function upload_data(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST",request_url);
     xhr.send(JSON.stringify(data));
-
 }
 
 
 function updateData(){
-    chrome.idle.queryState(30,function(state){
-
+    chrome.idle.queryState(30,function(state) {
         if (state === "active"){
-            chrome.tabs.query({"active":true,"lastFocusedWindow":true,},function(tabs){
+            chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs){
 
                 if (tabs.length === 0){
                     return;
@@ -102,8 +102,6 @@ function updateData(){
 
                             localStorage['domains'] = JSON.stringify(domains);
 
-
-                            //更新当天记录
                             var today_domains = JSON.parse(localStorage['today_domains']);
                             if(! today_domains[domain]){
                                 today_domains[domain] = 0;
@@ -118,14 +116,27 @@ function updateData(){
                             }
                             localStorage['today_domains'] = JSON.stringify(today_domains);
                         }
-
                     }
                 });
-
             });
         }
-
     });
 }
+
+
+function updateLocalStorage() {
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if(message === 'get-localstorage') {
+            console.log(localStorage);
+            sendResponse(localStorage);
+        }
+        return true;
+    });
+}
+
+
 setDefault();
 setInterval(updateData,update_interval * 1000);
+setInterval(updateLocalStorage, 1000);
+
+
