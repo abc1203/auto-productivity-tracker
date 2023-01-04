@@ -13,8 +13,8 @@ function App() {
       <Accordion name="Settings" content={<Settings />} />
       <TimeChart />
       <Accordion name="All Web Activities" content={<WebAct />} />
-      <Accordion name="Productive Sites" content={<Sites />} />
-      <Accordion name="Unproductive Sites" content={<Sites />} />
+      <Accordion name="Productive Sites" content={<Sites type="productive"/>} />
+      <Accordion name="Unproductive Sites" content={<Sites type="unproductive"/>} />
     </div>
   );
 }

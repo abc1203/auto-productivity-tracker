@@ -18,8 +18,6 @@ function setDefault(){
         localStorage['today'] = day;
         localStorage['today_domains'] = JSON.stringify({});
     }
-    console.log("background loaded");
-    window.alert("background loaded");
 }
 function checkTime(){
     var pre_time = localStorage['time'];
@@ -71,9 +69,9 @@ function upload_data(){
 
 
 function updateData(){
-    chrome.idle.queryState(30,function(state) {
+    chrome.idle.queryState(300, function(state) {
         if (state === "active"){
-            chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs){
+            chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs) {
 
                 if (tabs.length === 0){
                     return;
@@ -120,16 +118,6 @@ function updateData(){
                 });
             });
         }
-    });
-}
-
-
-function updateLocalStorage() {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if(message === 'get-localstorage') {
-            sendResponse(localStorage['today_domains']);
-        }
-        return true;
     });
 }
 

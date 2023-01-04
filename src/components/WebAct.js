@@ -6,7 +6,7 @@ class WebAct extends React.Component {
         super(props);
 
         this.state = {
-            intervalID: 0,
+            interval: 0,
             siteList: []
         }
 
@@ -25,13 +25,13 @@ class WebAct extends React.Component {
     
     format_seconds(seconds) {
         if(seconds <60){
-            return seconds+" Seconds";
+            return seconds+" s";
         }else if(seconds >=60 && seconds< 3600){
-            return Math.floor(seconds/60)+" Minutes "+seconds%60+" Seconds";
+            return Math.floor(seconds/60)+" m "+seconds%60+" s";
         }else if(seconds > 3600){
             var hour = Math.floor(seconds/3600);
             var minute = Math.floor((seconds-hour*3600)/60);
-            return hour+" Hour "+minute+" Minutes "+seconds%60+" Seconds";
+            return hour+" h "+minute+" m "+seconds%60+" s";
         }
     }
     
@@ -67,16 +67,13 @@ class WebAct extends React.Component {
 
 
     render() {
+        this.state.intervalID = setInterval(this.get_today_data, 1000);
         return (
             <div class="webact">
                 <dl>
-                    { this.state.intervalID = setInterval(this.get_today_data, 1000) }
-                    { clearInterval(this.state.intervalID) }
-                    
                     {this.state.siteList.map((site) =>
-                        <div><dt>{site}</dt><dd>{JSON.parse(localStorage['today_domains'])[site]}</dd></div>
+                        <div><dt>{site}</dt><dd>{this.format_seconds(JSON.parse(localStorage['today_domains'])[site])}</dd></div>
                     )}
-                    {/* <dt>{this.state.siteList}</dt> */}
                     
                 </dl>
             </div>
