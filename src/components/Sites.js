@@ -48,7 +48,7 @@ class Sites extends React.Component {
         }
 
         // update sitelist every second
-        setInterval(this.load_sites, 1000);
+        setInterval(this.load_sites, 500);
 
         return (
             <div class="sites">
