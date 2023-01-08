@@ -8,6 +8,7 @@
 input {
     height: 22px;
     width: 80%;
+    margin-bottom: 15px;
 }
 
 button {

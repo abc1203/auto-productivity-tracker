@@ -9,6 +9,7 @@ class Sites extends React.Component {
 
         this.state = {
             site: '',
+            siteDel: '',
             siteList: []
         }
 
@@ -53,7 +54,7 @@ class Sites extends React.Component {
         return (
             <div class="sites">
                 <form>
-                    <input id={this.props.type} type="text" placeholder="Add site to list" onChange={(e) => this.setState({ site: e.target.value })} />
+                    <input id={this.props.type+"add"} type="text" placeholder="Add site to list" onChange={(e) => this.setState({ site: e.target.value })} />
                     <button type="submit" onClick={(e) => {
                         e.preventDefault();
                         if(this.state.site.length !== 0 && !JSON.parse(localStorage[this.props.type]).includes(this.state.site)) {
@@ -63,8 +64,21 @@ class Sites extends React.Component {
                 
                             this.setState({ site: '' });
                         }
-                        document.getElementById(this.props.type).value=null;
+                        document.getElementById(this.props.type+"add").value=null;
                     }}>Add</button>
+
+                    <input id={this.props.type+"remove"} type="text" placeholder="Remove site from list" onChange={(e) => this.setState({ siteDel: e.target.value })} />
+                    <button type="submit" onClick={(e) => {
+                        e.preventDefault();
+                        if(this.state.siteDel.length !== 0 && JSON.parse(localStorage[this.props.type]).includes(this.state.siteDel)) {
+                            var domains = JSON.parse(localStorage[this.props.type]);
+                            domains.splice(domains.indexOf(this.state.siteDel), 1);
+                            localStorage[this.props.type] = JSON.stringify(domains);
+                
+                            this.setState({ siteDel: '' });
+                        }
+                        document.getElementById(this.props.type+"remove").value=null;
+                    }}>Remove</button>
                 </form>
 
                 <dl>
