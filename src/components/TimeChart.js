@@ -10,8 +10,7 @@ class TimeChart extends React.Component {
         this.state = {
             siteData: []
         }
-        
-        this.upload_data = this.upload_data.bind(this);
+
     }
 
     sort_keys(obj) {
@@ -31,7 +30,7 @@ class TimeChart extends React.Component {
         }
     }
 
-    upload_data() {
+    componentDidMount() {
         var data = []
 
         var domains = JSON.parse(localStorage['today_domains']);
@@ -50,8 +49,6 @@ class TimeChart extends React.Component {
     }
 
     render() {
-        setInterval(this.upload_data, 1000);
-        
         return(
             <div class="time-chart-section">
                 <div class="time-chart-heading">Today's Usage</div>

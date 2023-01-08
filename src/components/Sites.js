@@ -13,7 +13,7 @@ class Sites extends React.Component {
             siteList: []
         }
 
-        this.load_sites = this.load_sites.bind(this);
+        // this.load_sites = this.load_sites.bind(this);
     }
 
     sort_keys(obj) {
@@ -37,7 +37,7 @@ class Sites extends React.Component {
         }
     }
 
-    load_sites() {
+    componentDidMount() {
         this.setState({ siteList: JSON.parse(localStorage[this.props.type]) });
     }
 
@@ -49,7 +49,7 @@ class Sites extends React.Component {
         }
 
         // update sitelist every second
-        setInterval(this.load_sites, 500);
+        // setInterval(this.load_sites, 500);
 
         return (
             <div class="sites">

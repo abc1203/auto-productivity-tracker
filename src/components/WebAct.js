@@ -15,7 +15,7 @@ class WebAct extends React.Component {
         // this.timestamp_to_string = this.timestamp_to_string.bind(this);
         // this.get_detail_data = this.get_detail_data.bind(this);
         // this.get_detail_title = this.get_detail_title.bind(this);
-        this.get_today_data = this.get_today_data.bind(this);
+        // this.get_today_data = this.get_today_data.bind(this);
     }
 
     sort_keys(obj) {
@@ -59,7 +59,7 @@ class WebAct extends React.Component {
         return this.timestamp_to_string(time_start*1000) + " 到 "+ this.timestamp_to_string(time*1000)+" 的访问记录";
     }
 
-    get_today_data() {
+    componentDidMount() {
         var domains = JSON.parse(localStorage['today_domains']);
         var domain_keys = this.sort_keys(domains);
         this.setState({ siteList: domain_keys });
@@ -67,7 +67,6 @@ class WebAct extends React.Component {
 
 
     render() {
-        this.state.intervalID = setInterval(this.get_today_data, 1000);
         return (
             <div class="webact">
                 <dl>
