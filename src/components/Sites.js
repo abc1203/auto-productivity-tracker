@@ -12,8 +12,6 @@ class Sites extends React.Component {
             siteDel: '',
             siteList: []
         }
-
-        // this.load_sites = this.load_sites.bind(this);
     }
 
     sort_keys(obj) {
@@ -47,10 +45,7 @@ class Sites extends React.Component {
         if(!localStorage[this.props.type]) {
             localStorage[this.props.type] = JSON.stringify([]);
         }
-
-        // update sitelist every second
-        // setInterval(this.load_sites, 500);
-
+        
         return (
             <div class="sites">
                 <form>
@@ -62,7 +57,7 @@ class Sites extends React.Component {
                             domains.push(this.state.site);
                             localStorage[this.props.type] = JSON.stringify(domains);
                 
-                            this.setState({ site: '' });
+                            this.setState({ site: '', siteList: JSON.parse(localStorage[this.props.type]) });
                         }
                         document.getElementById(this.props.type+"add").value=null;
                     }}>Add</button>
@@ -75,7 +70,7 @@ class Sites extends React.Component {
                             domains.splice(domains.indexOf(this.state.siteDel), 1);
                             localStorage[this.props.type] = JSON.stringify(domains);
                 
-                            this.setState({ siteDel: '' });
+                            this.setState({ siteDel: '', siteList: JSON.parse(localStorage[this.props.type]) });
                         }
                         document.getElementById(this.props.type+"remove").value=null;
                     }}>Remove</button>
