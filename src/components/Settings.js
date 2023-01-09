@@ -33,12 +33,18 @@ class Settings extends React.Component {
                 </div>
 
                 <button class="settings-button" 
-                    onClick={() => this.setState( { isTracking: !this.state.isTracking } )}>
+                    onClick={() => {
+                        this.setState( { isTracking: !this.state.isTracking } );
+                        localStorage['is_tracking'] = !(JSON.parse(localStorage['is_tracking']));
+                    }}>
                         { this.state.isTracking ? "Pause Tracking" : "Continue Tracking" }
                 </button>
 
                 <button class="settings-button" 
-                    onClick={() => this.setState( { clearAllData: true } )}>
+                    onClick={() => {
+                        this.setState( { clearAllData: true } );
+                        // productive, unproductive, today_domains, domains
+                    }}>
                         Clear All Data
                 </button>
             </div>
