@@ -76,63 +76,64 @@ function upload_data(){
 
 
 function updateData(){
-    chrome.idle.queryState(JSON.parse(localStorage['inactivity_interval']), function(state) {
-        if (state === "active"){
-            chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs) {
-
-                if (tabs.length === 0){
-                    return;
-                }
-
-                var tab = tabs[0];
-                chrome.windows.get(tab.windowId,function(win){
-                    if(win.focused){
-
-                        if(!inBlacklist(tab.url)){
-                            var domain = extractDomain(tab.url);
-                            var domains = JSON.parse(localStorage['domains']);
-
-                            if(! domains[domain]){
-                                domains[domain] = 0;
-                            }
-                            var check_time = checkTime();
-                            if(check_time === false){
-                                domains[domain] += update_interval;
-                            }else{
-                                upload_data();
-                                localStorage['time'] = check_time;
-                                domains = {};
-                                domains[domain] = update_interval;
-                            }
-
-                            localStorage['domains'] = JSON.stringify(domains);
-
-                            var today_domains = JSON.parse(localStorage['today_domains']);
-                            if(! today_domains[domain]){
-                                today_domains[domain] = 0;
-                            }
-                            var check_day = checkDay();
-                            if(check_day === false){
-                                today_domains[domain] += update_interval;
-                            }else{
-                                localStorage['today'] = check_day;
-                                    today_domains = {};
-                                    today_domains[domain] = update_interval;
-                            }
-                            localStorage['today_domains'] = JSON.stringify(today_domains);
-                        }
+    if(JSON.parse(localStorage['is_tracking']) === true) {
+        chrome.idle.queryState(JSON.parse(localStorage['inactivity_interval']), function(state) {
+            if (state === "active"){
+                chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs) {
+    
+                    if (tabs.length === 0){
+                        return;
                     }
+    
+                    var tab = tabs[0];
+                    chrome.windows.get(tab.windowId,function(win){
+                        if(win.focused){
+    
+                            if(!inBlacklist(tab.url)){
+                                var domain = extractDomain(tab.url);
+                                var domains = JSON.parse(localStorage['domains']);
+    
+                                if(! domains[domain]){
+                                    domains[domain] = 0;
+                                }
+                                var check_time = checkTime();
+                                if(check_time === false){
+                                    domains[domain] += update_interval;
+                                }else{
+                                    upload_data();
+                                    localStorage['time'] = check_time;
+                                    domains = {};
+                                    domains[domain] = update_interval;
+                                }
+    
+                                localStorage['domains'] = JSON.stringify(domains);
+    
+                                var today_domains = JSON.parse(localStorage['today_domains']);
+                                if(! today_domains[domain]){
+                                    today_domains[domain] = 0;
+                                }
+                                var check_day = checkDay();
+                                if(check_day === false){
+                                    today_domains[domain] += update_interval;
+                                }else{
+                                    localStorage['today'] = check_day;
+                                        today_domains = {};
+                                        today_domains[domain] = update_interval;
+                                }
+                                localStorage['today_domains'] = JSON.stringify(today_domains);
+                            }
+                        }
+                    });
                 });
-            });
-        }
-    });
+            }
+        });
+    }
 }
 
 
 setDefault();
-if(JSON.parse(localStorage['is_tracking']) === true) {
-    setInterval(updateData,update_interval * 1000);
-}
+setInterval(updateData,update_interval * 1000);
+
 
 
 

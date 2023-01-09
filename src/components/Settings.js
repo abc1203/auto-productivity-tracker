@@ -15,8 +15,8 @@ class Settings extends React.Component {
     }
 
     componentDidMount() {
+        // mount inactivity interval
         var index;
-
         switch(localStorage['inactivity_interval']) {
             case "30":
                 index = "0";
@@ -44,6 +44,9 @@ class Settings extends React.Component {
                 break;
         }
         document.getElementById('time-options').selectedIndex = index;
+
+        // mount isTracking
+        this.setState( {isTracking: JSON.parse(localStorage['is_tracking'])} );
     }
 
     change_inactivity_interval() {
