@@ -18,7 +18,14 @@ function setDefault(){
         localStorage['today'] = day;
         localStorage['today_domains'] = JSON.stringify({});
     }
+    if(!localStorage['inactivity_interval']) {
+        localStorage['inactivity_interval'] = 300;
+    }
+    if(!localStorage['is_tracking']) {
+        localStorage['is_tracking'] = true;
+    }
 }
+
 function checkTime(){
     var pre_time = localStorage['time'];
     var now_time = Math.floor((new Date().getTime())/1000/count_interval)*count_interval;
@@ -69,7 +76,7 @@ function upload_data(){
 
 
 function updateData(){
-    chrome.idle.queryState(300, function(state) {
+    chrome.idle.queryState(JSON.parse(localStorage['inactivity_interval']), function(state) {
         if (state === "active"){
             chrome.tabs.query({"active":true,"lastFocusedWindow":true,}, function(tabs) {
 
@@ -123,7 +130,9 @@ function updateData(){
 
 
 setDefault();
-setInterval(updateData,update_interval * 1000);
-// setInterval(updateLocalStorage, 1000);
+if(JSON.parse(localStorage['is_tracking']) === true) {
+    setInterval(updateData,update_interval * 1000);
+}
+
 
 

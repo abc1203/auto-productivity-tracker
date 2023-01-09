@@ -133,6 +133,6 @@ setDefault();
 if(JSON.parse(localStorage['is_tracking']) === true) {
     setInterval(updateData,update_interval * 1000);
 }
-// setInterval(updateLocalStorage, 1000);
+
 
 
