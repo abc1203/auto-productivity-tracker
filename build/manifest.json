@@ -2,7 +2,7 @@
   "name": "Automatic Productivity Webtime Tracker",
   "description": "An application that track the user's web activity and record their time on apps that they deem productive or unproductive",
   "version": "1.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "Automatic Productivity Webtime Tracker"
