@@ -17,3 +17,8 @@ Inside the Settings tab, the user can adjust the inactivity interval - the amoun
 
 The entire app is built using JavaScript and the front-end is handled using React. Some of the React dependencies include ```material-ui```, ```react-donut-chart```, and ```emotion```. For more information on the used dependencies, visit ```package.json```. The app uses window.localStorage to record the user's browsing activities on the web.
 
+
+## How to Set Up
+
+This chrome extension is currently in the process of migrating from manifest v2 to v3, and it is not available from the chrome web store. To use this extension, download the main branch of this repository and head to your [chrome extension](chrome://extensions/) page.
+
