@@ -11,5 +11,5 @@ As of right now, the productivity webtime tracker only records data on the prese
 
 ## Technologies Used
 
-The entire app is built using JavaScript and the front-end is handled using React. Some of the React dependencies include material-ui, react-donut-chart, and emotion. For more information on the used dependencies, visit package.json. The app uses window.localStorage to record the user's browsing activities on the web.
+The entire app is built using JavaScript and the front-end is handled using React. Some of the React dependencies include material-ui, react-donut-chart, and emotion. For more information on the used dependencies, visit ```package.json```. The app uses window.localStorage to record the user's browsing activities on the web.
 
